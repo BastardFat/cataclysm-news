@@ -11,10 +11,10 @@ namespace BastardFat.CataclysmNews.GitHubService
 {
     class EventChecker
     {
-        public EventChecker(string apiUrl)
+        public EventChecker(string apiUrl, int refreshPeriod)
         {
             ApiUrl = apiUrl;
-            Timer t = new Timer(1000);
+            Timer t = new Timer(refreshPeriod);
             t.Elapsed += Refresh;
             t.Start();
         }
