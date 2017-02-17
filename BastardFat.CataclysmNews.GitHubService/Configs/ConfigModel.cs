@@ -19,6 +19,7 @@ namespace BastardFat.CataclysmNews.GitHubService.Configs
         public string GitHubUserAgent { get; set; }
         public string SiteServerIp { get; set; }
         public int SiteServerPort { get; set; }
+        public string TelegramBotToken { get; set; }
 
         private static ConfigModel configs;
         public static ConfigModel Get

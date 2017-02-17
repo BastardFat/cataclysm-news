@@ -4,6 +4,7 @@
   "OriginUrl": "http://cataclysmnews.rf.gd",
   "ReferUrl": "http://cataclysmnews.rf.gd/api/upload_post.php",
   "RequestTemplateFile": "Client\\RequestTemplate.txt",
+  "TelegramBotToken": "D:\\private\\token.txt",
   "GitHubUser": "BastardFat",
   "GitHubPasswordFile": "D:\\private\\passw.txt",
   "GitHubUserAgent": "cataclysm-newsfeed",
