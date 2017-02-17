@@ -27,7 +27,7 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
 
         static string SendViaTcp(string address, int port, string message)
         {
-            byte[] data = Encoding.ASCII.GetBytes(message);
+            byte[] data = Encoding.ASCII.GetBytes(PrepareRequest(message));
             using (TcpClient client = new TcpClient(address, 80))
             using (var stream = client.GetStream())
             {
@@ -43,6 +43,14 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
                 return respStr;
             }
         }
+
+        private static string PrepareRequest(string body) =>
+            File.ReadAllText(ConfigModel.Get.RequesTemplateFile)
+                .Replace("{ORIGINURL}", ConfigModel.Get.OriginUrl)
+                .Replace("{REFERURL}", ConfigModel.Get.ReferUrl)
+                .Replace("{CONTENTLENGTH}", body.Length.ToString())
+                .Replace("{REQUESTBODY}", body);
+
 
     }
 }

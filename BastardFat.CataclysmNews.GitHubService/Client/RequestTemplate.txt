@@ -7,7 +7,7 @@ Origin: {ORIGINURL}
 X-Requested-With: XMLHttpRequest
 User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
 Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-Referer: {REFERERURL}
+Referer: {REFERURL}
 Accept-Encoding: gzip, deflate
 Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4
 Cookie: __test=14cffd9b5d9782b26f962c29925cbdc5; _ga=GA1.2.1334221274.1487061467
