@@ -24,7 +24,7 @@ namespace BastardFat.CataclysmNews.GitHubService
 
         private static void EventChecker_IssuesEvent(Serialization.ResponseModels.Event e)
         {
-            Console.WriteLine("Issue");
+            Console.WriteLine($"{e.type} - {e.payload.issue.title}");
             var model = new EventModelForSending()
             {
                 avatar_url = e.actor.avatar_url,
@@ -43,6 +43,7 @@ namespace BastardFat.CataclysmNews.GitHubService
         private static void EventChecker_PullRequestEvent(Serialization.ResponseModels.Event e)
         {
 
+            Console.WriteLine($"{e.type} - {e.payload.pull_request.title}");
             var model = new EventModelForSending()
             {
                 avatar_url = e.actor.avatar_url,

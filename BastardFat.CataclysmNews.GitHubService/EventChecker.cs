@@ -34,9 +34,9 @@ namespace BastardFat.CataclysmNews.GitHubService
             var newLastReceivedTime = lastReceivedTime;
             foreach (var item in events)
             {
-                if (item.created_at > lastReceivedTime)
+                if (item.created_at > lastReceivedTime + TimeSpan.FromSeconds(2))
                 {
-                    if (item.created_at > newLastReceivedTime)
+                    if (item.created_at > newLastReceivedTime + TimeSpan.FromSeconds(2))
                         newLastReceivedTime = item.created_at;
                     if (item.type == "IssuesEvent") IssuesEvent.Invoke(item);
                     if (item.type == "PullRequestEvent") PullRequestEvent.Invoke(item);
