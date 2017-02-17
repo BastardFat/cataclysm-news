@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BastardFat.CataclysmNews.GitHubService.Configs;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -12,8 +13,8 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
         {
             HttpWebRequest http_request = WebRequest.CreateHttp(url);
             http_request.Method = "GET";
-            http_request.UserAgent = "Test-app";
-            http_request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes("BastardFat:" + File.ReadAllText(@"D:\private\passw.txt"))));
+            http_request.UserAgent = ConfigModel.Get.GitHubUserAgent;
+            http_request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(ConfigModel.Get.GitHubUser + ":" + File.ReadAllText(ConfigModel.Get.GitHubPasswordFile))));
 
             using (var response = (HttpWebResponse) http_request.GetResponse())
             {

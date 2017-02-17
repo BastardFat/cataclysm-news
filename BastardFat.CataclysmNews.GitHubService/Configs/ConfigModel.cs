@@ -11,9 +11,24 @@ namespace BastardFat.CataclysmNews.GitHubService.Configs
     {
         public string ApiUrl { get; set; }
         public int RefreshPeriod { get; set; }
+        public string OriginUrl { get; set; }
+        public string ReferUrl { get; set; }
+        public string RequesTemplateFile { get; set; }
+        public string GitHubUser { get; set; }
+        public string GitHubPasswordFile { get; set; }
+        public string GitHubUserAgent { get; set; }
 
 
-        public static ConfigModel GetFromFile() => Newtonsoft.Json.JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText(@"Configs\settings.json"));
+        private static ConfigModel configs;
+        public static ConfigModel Get
+        {
+            get
+            {
+                if(configs == null)
+                    configs = Newtonsoft.Json.JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText(@"Configs\settings.json"));
+                return configs;
+            }
+        }
 
     }
 }

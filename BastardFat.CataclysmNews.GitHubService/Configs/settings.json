@@ -1,4 +1,10 @@
 ﻿{
   "ApiUrl": "https://api.github.com/repositories/5973855/events",
-  "RefreshPeriod": 1000
+  "RefreshPeriod": 1000,
+  "OriginUrl": "http://cataclysmnews.rf.gd",
+  "ReferUrl": "http://cataclysmnews.rf.gd/api/upload_post.php",
+  "RequesTemplateFile": "Configs\\settings.json",
+  "GitHubUser": "BastardFat",
+  "GitHubPasswordFile": "D:\\private\\passw.txt",
+  "GitHubUserAgent": "cataclysm-newsfeed"
 }
