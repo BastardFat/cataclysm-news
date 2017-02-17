@@ -13,11 +13,12 @@ namespace BastardFat.CataclysmNews.GitHubService.Configs
         public int RefreshPeriod { get; set; }
         public string OriginUrl { get; set; }
         public string ReferUrl { get; set; }
-        public string RequesTemplateFile { get; set; }
+        public string RequestTemplateFile { get; set; }
         public string GitHubUser { get; set; }
         public string GitHubPasswordFile { get; set; }
         public string GitHubUserAgent { get; set; }
-
+        public string SiteServerIp { get; set; }
+        public int SiteServerPort { get; set; }
 
         private static ConfigModel configs;
         public static ConfigModel Get

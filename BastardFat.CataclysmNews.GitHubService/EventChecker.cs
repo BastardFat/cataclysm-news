@@ -36,7 +36,8 @@ namespace BastardFat.CataclysmNews.GitHubService
             {
                 if (item.created_at > lastReceivedTime)
                 {
-                    newLastReceivedTime = item.created_at;
+                    if (item.created_at > newLastReceivedTime)
+                        newLastReceivedTime = item.created_at;
                     if (item.type == "IssuesEvent") IssuesEvent.Invoke(item);
                     if (item.type == "PullRequestEvent") PullRequestEvent.Invoke(item);
                 }
@@ -44,7 +45,7 @@ namespace BastardFat.CataclysmNews.GitHubService
             lastReceivedTime = newLastReceivedTime;
         }
 
-        private DateTime lastReceivedTime = DateTime.UtcNow - TimeSpan.FromDays(2);
+        private DateTime lastReceivedTime = DateTime.UtcNow;
         private string ApiUrl;
         private HttpSender httpSender = new HttpSender();
 

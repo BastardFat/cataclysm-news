@@ -25,27 +25,37 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
             }
         }
 
-        static string SendViaTcp(string address, int port, string message)
+        public string SendViaTcp(string address, int port, string message)
         {
-            byte[] data = Encoding.ASCII.GetBytes(PrepareRequest(message));
-            using (TcpClient client = new TcpClient(address, 80))
-            using (var stream = client.GetStream())
+            try
             {
-                stream.Write(data, 0, data.Length);
-                data = new byte[256];
-                var respStr = String.Empty;
-                int rec;
-                do
+                byte[] data = Encoding.ASCII.GetBytes(PrepareRequest(message));
+                using (TcpClient client = new TcpClient(address, 80))
+                using (var stream = client.GetStream())
                 {
-                    rec = stream.Read(data, 0, data.Length);
-                    respStr += Encoding.ASCII.GetString(data, 0, rec);
-                } while (rec == data.Length);
-                return respStr;
+                    stream.Write(data, 0, data.Length);
+                    data = new byte[256];
+                    var respStr = String.Empty;
+                    int rec;
+                    do
+                    {
+                        rec = stream.Read(data, 0, data.Length);
+                        respStr += Encoding.ASCII.GetString(data, 0, rec);
+                    } while (rec == data.Length);
+                    return respStr;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                throw;
             }
         }
 
-        private static string PrepareRequest(string body) =>
-            File.ReadAllText(ConfigModel.Get.RequesTemplateFile)
+        private string PrepareRequest(string body) =>
+            File.ReadAllText(ConfigModel.Get.RequestTemplateFile)
                 .Replace("{ORIGINURL}", ConfigModel.Get.OriginUrl)
                 .Replace("{REFERURL}", ConfigModel.Get.ReferUrl)
                 .Replace("{CONTENTLENGTH}", body.Length.ToString())

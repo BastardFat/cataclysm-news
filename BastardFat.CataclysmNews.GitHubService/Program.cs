@@ -1,6 +1,9 @@
-﻿using BastardFat.CataclysmNews.GitHubService.Configs;
+﻿using BastardFat.CataclysmNews.GitHubService.Client;
+using BastardFat.CataclysmNews.GitHubService.Configs;
+using BastardFat.CataclysmNews.GitHubService.Serialization.RequestModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +20,43 @@ namespace BastardFat.CataclysmNews.GitHubService
             while (Console.ReadLine().ToLower() != "stop") Console.WriteLine("Type \"stop\" to stop service");
         }
 
-        private static void EventChecker_IssuesEvent(Serialization.ResponseModels.Event obj)
+        private static HttpSender Sender = new HttpSender();
+
+        private static void EventChecker_IssuesEvent(Serialization.ResponseModels.Event e)
         {
             Console.WriteLine("Issue");
+            var model = new EventModelForSending()
+            {
+                avatar_url = e.actor.avatar_url,
+                html = Markdig.Markdown.ToHtml(e.payload.issue.body),
+                label = e.payload.action,
+                title = e.payload.issue.title,
+                type = "Issue",
+                username = e.actor.login
+            };
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+
+            Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
         }
 
-        private static void EventChecker_PullRequestEvent(Serialization.ResponseModels.Event obj)
+        private static void EventChecker_PullRequestEvent(Serialization.ResponseModels.Event e)
         {
-            Console.WriteLine("PR");
+
+            var model = new EventModelForSending()
+            {
+                avatar_url = e.actor.avatar_url,
+                html = $"<span style=\"color:green; \">++{e.payload.pull_request.additions}</span> <span style=\"color: red; \">--{e.payload.pull_request.deletions}</span> in <b>{e.payload.pull_request.commits}</b> commit(s). <b>{e.payload.pull_request.changed_files}</b> file(s) changed <br /> <a href=\"{e.payload.pull_request.html_url}\">Github link</a>",
+                label = e.payload.action,
+                title = e.payload.pull_request.title,
+                type = "Pull Request",
+                username = e.actor.login
+            };
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+
+            Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
+
         }
 
 

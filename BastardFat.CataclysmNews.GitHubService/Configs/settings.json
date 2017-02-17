@@ -3,8 +3,10 @@
   "RefreshPeriod": 1000,
   "OriginUrl": "http://cataclysmnews.rf.gd",
   "ReferUrl": "http://cataclysmnews.rf.gd/api/upload_post.php",
-  "RequesTemplateFile": "Configs\\settings.json",
+  "RequestTemplateFile": "Client\\RequestTemplate.txt",
   "GitHubUser": "BastardFat",
   "GitHubPasswordFile": "D:\\private\\passw.txt",
-  "GitHubUserAgent": "cataclysm-newsfeed"
+  "GitHubUserAgent": "cataclysm-newsfeed",
+  "SiteServerIp": "185.27.134.167",
+  "SiteServerPort": 80
 }
