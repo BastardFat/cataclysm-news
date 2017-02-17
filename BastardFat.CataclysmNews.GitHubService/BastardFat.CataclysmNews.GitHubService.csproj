@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\HttpSender.cs" />
+    <Compile Include="Configs\ConfigModel.cs" />
     <Compile Include="EventChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
