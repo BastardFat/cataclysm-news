@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BastardFat.CataclysmNews.GitHubService.Configs
 {
-    class ConfigModel
+    internal class ConfigModel
     {
         public string ApiUrl { get; set; }
         public int RefreshPeriod { get; set; }

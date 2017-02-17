@@ -9,12 +9,13 @@ using System.Timers;
 
 namespace BastardFat.CataclysmNews.GitHubService
 {
-    class EventChecker
+    public class EventChecker
     {
         public EventChecker(string apiUrl, int refreshPeriod)
         {
             ApiUrl = apiUrl;
-            Timer t = new Timer(refreshPeriod);
+            Timer t = new Timer(10000);
+//            Timer t = new Timer(refreshPeriod);
             t.Elapsed += Refresh;
             t.Start();
         }
