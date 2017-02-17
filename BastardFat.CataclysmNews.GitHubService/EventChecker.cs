@@ -14,8 +14,7 @@ namespace BastardFat.CataclysmNews.GitHubService
         public EventChecker(string apiUrl, int refreshPeriod)
         {
             ApiUrl = apiUrl;
-            Timer t = new Timer(10000);
-//            Timer t = new Timer(refreshPeriod);
+            Timer t = new Timer(refreshPeriod);
             t.Elapsed += Refresh;
             t.Start();
         }
@@ -32,16 +31,17 @@ namespace BastardFat.CataclysmNews.GitHubService
             var events = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Event>>(json)
                         .Where(e => (e.type == "IssuesEvent" || e.type == "PullRequestEvent") && e.created_at > lastReceivedTime)
                         .ToList();
-
+            var newLastReceivedTime = lastReceivedTime;
             foreach (var item in events)
             {
                 if (item.created_at > lastReceivedTime)
                 {
-                    lastReceivedTime = item.created_at;
+                    newLastReceivedTime = item.created_at;
                     if (item.type == "IssuesEvent") IssuesEvent.Invoke(item);
                     if (item.type == "PullRequestEvent") PullRequestEvent.Invoke(item);
                 }
             }
+            lastReceivedTime = newLastReceivedTime;
         }
 
         private DateTime lastReceivedTime = DateTime.UtcNow - TimeSpan.FromDays(2);
