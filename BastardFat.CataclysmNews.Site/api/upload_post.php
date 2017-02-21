@@ -1,6 +1,11 @@
 <?php
+
+echo file_get_contents('php://input');
+
+mb_internal_encoding("UTF-8");
 $allowed_IP = array(
-	"80.80.101.176",
+    "127.0.0.1",
+	"80.80.101.176"
 );
 echo $_SERVER['REMOTE_ADDR'] . "<br>";
 
@@ -11,7 +16,10 @@ if(!in_array($_SERVER['REMOTE_ADDR'], $allowed_IP))
 }
 const EOL = "<br>";
 
-$data = json_decode(file_get_contents('php://input'), true);
+$input = file_get_contents('php://input');
+$input = iconv('UTF-8', 'UTF-8//IGNORE', utf8_encode($input));
+$data = json_decode($input, true);
+echo 'ERROR:"'.json_last_error() . '"';
 print_r($data);
 
 

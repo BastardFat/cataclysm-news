@@ -13,6 +13,7 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
         {
             HttpWebRequest http_request = WebRequest.CreateHttp(url);
             http_request.Method = "GET";
+            http_request.Headers.Add("Accept-Charset: utf-8");
             http_request.UserAgent = ConfigModel.Get.GitHubUserAgent;
             http_request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(ConfigModel.Get.GitHubUser + ":" + File.ReadAllText(ConfigModel.Get.GitHubPasswordFile))));
 
@@ -29,7 +30,7 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
         {
             try
             {
-                byte[] data = Encoding.ASCII.GetBytes(PrepareRequest(message));
+                byte[] data = Encoding.Default.GetBytes(PrepareRequest(message));
                 using (TcpClient client = new TcpClient(address, 80))
                 using (var stream = client.GetStream())
                 {
@@ -40,7 +41,7 @@ namespace BastardFat.CataclysmNews.GitHubService.Client
                     do
                     {
                         rec = stream.Read(data, 0, data.Length);
-                        respStr += Encoding.ASCII.GetString(data, 0, rec);
+                        respStr += Encoding.Default.GetString(data, 0, rec);
                     } while (rec == data.Length);
                     return respStr;
                 }

@@ -1,7 +1,8 @@
 <?php require_once("./controller/index.php");
-$notcanNext =  (intval((CountPosts()+9) / 10) - 1) < (intval($_GET['page']) + 1);
-$notcanPrev =  (intval($_GET['page']) - 1) < 0
-
+      $post_count = CountPosts();
+      $page_count = intval(($post_count + 9) / 10);
+      $notcanNext =  ($page_count - 1) < (intval($_GET['page']) + 1);
+      $notcanPrev =  (intval($_GET['page']) - 1) < 0;
 ?>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +29,7 @@ $notcanPrev =  (intval($_GET['page']) - 1) < 0
 </div>
 
 <h3>
-    <span class="label label-default">Page <?php echo (intval($_GET['page']) + 1); ?></span>
+    <span class="label label-default">Page <?php echo (intval($_GET['page']) + 1); ?> of <?php echo $page_count; ?></span>
     </h3>
 
 

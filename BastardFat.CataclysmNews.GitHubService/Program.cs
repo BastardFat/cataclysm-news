@@ -35,7 +35,7 @@ namespace BastardFat.CataclysmNews.GitHubService
                 username = e.actor.login
             };
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model, new Newtonsoft.Json.JsonSerializerSettings() { StringEscapeHandling = Newtonsoft.Json.StringEscapeHandling.EscapeNonAscii });
 
             Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
             TelegramBot.TelegramSender.Send($"Issue ({e.payload.action}) \"{e.payload.issue.title}\" from {e.actor.login}");
@@ -48,14 +48,15 @@ namespace BastardFat.CataclysmNews.GitHubService
             var model = new EventModelForSending()
             {
                 avatar_url = e.actor.avatar_url,
-                html = $"<span style=\"color:green; \">++{e.payload.pull_request.additions}</span> <span style=\"color: red; \">--{e.payload.pull_request.deletions}</span> in <b>{e.payload.pull_request.commits}</b> commit(s). <b>{e.payload.pull_request.changed_files}</b> file(s) changed <br /> <a href=\"{e.payload.pull_request.html_url}\">Github link</a>",
+                html = $"<span style=\"color:green; \">++{e.payload.pull_request.additions}</span> <span style=\"color: red; \">--{e.payload.pull_request.deletions}</span> in <b>{e.payload.pull_request.commits}</b> commit(s). <b>{e.payload.pull_request.changed_files}</b> file(s) changed <br /> <a href=\"{e.payload.pull_request.html_url}\">Github link</a>" 
+                    + Markdig.Markdown.ToHtml(e.payload.pull_request.body ?? ""),
                 label = e.payload.action,
                 title = e.payload.pull_request.title,
                 type = "Pull Request",
                 username = e.actor.login
             };
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model, new Newtonsoft.Json.JsonSerializerSettings() { StringEscapeHandling = Newtonsoft.Json.StringEscapeHandling.EscapeNonAscii });
 
             Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
             TelegramBot.TelegramSender.Send($"Pull Request ({e.payload.action}) \"{e.payload.pull_request.title}\" from {e.actor.login}");

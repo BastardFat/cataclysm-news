@@ -14,5 +14,6 @@ namespace BastardFat.CataclysmNews.GitHubService.Serialization.ResponseModels
         public int additions { get; set; }
         public int deletions { get; set; }
         public int changed_files { get; set; }
+        public string body { get; set; }
     }
 }
