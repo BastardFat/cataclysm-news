@@ -21,6 +21,8 @@ namespace BastardFat.CataclysmNews.GitHubService.Configs
         public int SiteServerPort { get; set; }
         public string TelegramBotToken { get; set; }
 
+        public string TestApiUrl { get; set; } = "https://api.github.com/events";
+
         private static ConfigModel configs;
         public static ConfigModel Get
         {

@@ -14,7 +14,7 @@ namespace BastardFat.CataclysmNews.GitHubService
     {
         static void Main(string[] args)
         {
-            EventChecker EventChecker = new EventChecker("https://api.github.com/events", ConfigModel.Get.RefreshPeriod);
+            EventChecker EventChecker = new EventChecker(ConfigModel.Get.ApiUrl, ConfigModel.Get.RefreshPeriod);
             EventChecker.IssuesEvent += EventChecker_IssuesEvent;
             EventChecker.PullRequestEvent += EventChecker_PullRequestEvent;
             while (Console.ReadLine().ToLower() != "stop") Console.WriteLine("Type \"stop\" to stop service");
