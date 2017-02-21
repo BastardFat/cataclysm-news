@@ -16,7 +16,9 @@ namespace BastardFat.CataclysmNews.GitHubService
             ApiUrl = apiUrl;
             Timer t = new Timer(refreshPeriod);
             t.Elapsed += Refresh;
+            
             t.Start();
+           
         }
 
         public event Action<Event> IssuesEvent = delegate { };
@@ -29,23 +31,18 @@ namespace BastardFat.CataclysmNews.GitHubService
         {
             var json = httpSender.SendGet(ApiUrl);
             var events = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Event>>(json)
-                        .Where(e => (e.type == "IssuesEvent" || e.type == "PullRequestEvent") && e.created_at > lastReceivedTime)
+                        .Where(e => (e.type == "IssuesEvent" || e.type == "PullRequestEvent") && e.created_at.Ticks > lastReceivedTime)
                         .ToList();
-            var newLastReceivedTime = lastReceivedTime;
-            foreach (var item in events)
+
+            foreach (var item in events.OrderBy(e => e.created_at))
             {
-                if (item.created_at > lastReceivedTime + TimeSpan.FromSeconds(2))
-                {
-                    if (item.created_at > newLastReceivedTime + TimeSpan.FromSeconds(2))
-                        newLastReceivedTime = item.created_at;
-                    if (item.type == "IssuesEvent") IssuesEvent.Invoke(item);
-                    if (item.type == "PullRequestEvent") PullRequestEvent.Invoke(item);
-                }
+                lastReceivedTime = item.created_at.Ticks;
+                if (item.type == "IssuesEvent") IssuesEvent.Invoke(item);
+                if (item.type == "PullRequestEvent") PullRequestEvent.Invoke(item);
             }
-            lastReceivedTime = newLastReceivedTime;
         }
 
-        private DateTime lastReceivedTime = DateTime.UtcNow;
+        private long lastReceivedTime = DateTime.UtcNow.Ticks;
         private string ApiUrl;
         private HttpSender httpSender = new HttpSender();
 
