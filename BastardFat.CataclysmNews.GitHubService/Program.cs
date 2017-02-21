@@ -14,7 +14,7 @@ namespace BastardFat.CataclysmNews.GitHubService
     {
         static void Main(string[] args)
         {
-            EventChecker EventChecker = new EventChecker(ConfigModel.Get.TestApiUrl, ConfigModel.Get.RefreshPeriod);
+            EventChecker EventChecker = new EventChecker(ConfigModel.Get.ApiUrl, ConfigModel.Get.RefreshPeriod);
             EventChecker.IssuesEvent += EventChecker_IssuesEvent;
             EventChecker.PullRequestEvent += EventChecker_PullRequestEvent;
             while (Console.ReadLine().ToLower() != "stop") Console.WriteLine("Type \"stop\" to stop service");
@@ -38,7 +38,7 @@ namespace BastardFat.CataclysmNews.GitHubService
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
 
             Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
-            //TelegramBot.TelegramSender.Send($"Issue ({e.payload.action}) \"{e.payload.issue.title}\" from {e.actor.login}");
+            TelegramBot.TelegramSender.Send($"Issue ({e.payload.action}) \"{e.payload.issue.title}\" from {e.actor.login}");
         }
 
         private static void EventChecker_PullRequestEvent(Serialization.ResponseModels.Event e)
@@ -58,7 +58,7 @@ namespace BastardFat.CataclysmNews.GitHubService
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
 
             Sender.SendViaTcp(ConfigModel.Get.SiteServerIp, ConfigModel.Get.SiteServerPort, json);
-            //TelegramBot.TelegramSender.Send($"Pull Request ({e.payload.action}) \"{e.payload.pull_request.title}\" from {e.actor.login}");
+            TelegramBot.TelegramSender.Send($"Pull Request ({e.payload.action}) \"{e.payload.pull_request.title}\" from {e.actor.login}");
         }
 
 
