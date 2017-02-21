@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/BastardFat.CataclysmNews.Site/Properties/PublishProfiles/RF.GD.phppub

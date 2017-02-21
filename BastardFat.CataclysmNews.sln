@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BastardFat.CataclysmNews.GitHubService", "BastardFat.CataclysmNews.GitHubService\BastardFat.CataclysmNews.GitHubService.csproj", "{CA3A5F11-9216-4094-A2A2-F88F793160F0}"
 EndProject
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "BastardFat.CataclysmNews.Site", "BastardFat.CataclysmNews.Site\BastardFat.CataclysmNews.Site.phpproj", "{95C2C6AF-3787-4759-9581-6107A2C70D33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{CA3A5F11-9216-4094-A2A2-F88F793160F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA3A5F11-9216-4094-A2A2-F88F793160F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA3A5F11-9216-4094-A2A2-F88F793160F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C2C6AF-3787-4759-9581-6107A2C70D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C2C6AF-3787-4759-9581-6107A2C70D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
