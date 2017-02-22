@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htacces" />
+    <Content Include="favicon.ico" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.css.map" />
     <Content Include="css\bootstrap-theme.min.css" />

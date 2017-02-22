@@ -12,6 +12,7 @@ require_once("include-js.php");
     <title>Cataclysm News</title>
     <link href="./css/bootstrap-theme.css" rel="stylesheet" />
     <link href="./css/bootstrap.css" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" />
     <style>
         .shadow {
             box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.24);
@@ -24,7 +25,7 @@ require_once("include-js.php");
             padding-left: 5%;
             margin-bottom: 30px;
             color: inherit;
-            background-color: #eee;
+            background-color: #fff;
         }
 
             .message hr {
@@ -57,7 +58,7 @@ require_once("include-js.php");
     </style>
 
 </head>
-<body>
+<body style="background-color:#eee">
     <script src="/js/jquery-3.1.1.js"></script>
     <script src="/js/bootstrap.js"></script>
     <div class="container body-content">
